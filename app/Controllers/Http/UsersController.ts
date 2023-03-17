@@ -5,9 +5,18 @@ import bcryptjs from 'bcryptjs';
 import Env from '@ioc:Adonis/Core/Env';
 
 export default class UsersController {
-  public async index({ response }: HttpContextContract) {
-    try {
-      response.status(200).json({"state": true, "message": "Listado de estudiantes", "users": await User.all()});
+  public async index({ request, response,  }: HttpContextContract) {
+    try {      
+      const perPage = request.input('perPage', 1);
+      const page = request.input('page', 10);
+      const filter = request.input('filter');
+      console.log(filter);      
+      // WIP: query only students and use filter
+      const results = await User.query().paginate(page, perPage);
+
+      response.status(200).json({"state": true,
+                                "message": "Listado de estudiantes",
+                                "users": results.all()});
     } catch (error) {
       console.log(error);
       response.status(500).json({"state": false, "message": "Fallo en el listado de estudiantes"});

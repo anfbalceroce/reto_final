@@ -96,18 +96,35 @@ export default class UsersController {
     return payload;
   }
 
-  public async delete({ params, response}: HttpContextContract) {
+  public async update({ params, request, response}: HttpContextContract) {
     try {
-      const user = await User.find(params.id);
+      const user = await User.find(params.id);      
       if (user === null) {
-        response.status(404).json({"state": true, "message": "Estudiante creado correctamente"});
-      } else {
-        await user.delete();
-        response.status(204);
+        return response.status(404).json({"state": false, "message": "Error al actualizar"});
       }
+      const {firstName, secondName, surname, secondSurName, typeDocument, documentNumber, email, phone} = request.all();
+      user.firstName = firstName;
+      user.secondName = secondName;
+      user.surname = surname;
+      user.secondSurname = secondSurName;
+      user.documentTypeId = typeDocument;
+      user.documentNumber = documentNumber;
+      user.email = email;
+      user.phone = phone;
+      await user.save();
+      response.status(200).json({"state": true, "message": "Se actualizo correctamente"});
     } catch (error) {
       console.log(error);
-      response.status(500).json({"state": true, "message": "Estudiante creado correctamente"});
+      response.status(500).json({"state": false, "message": "Error al actualizar"});
+    }
+  }
+
+  public async get({ params, response }: HttpContextContract) {
+    try {
+      response.status(200).json(await User.find(params.id));
+    } catch (error) {
+      console.log(error);
+      response.status(500).json({"state": false, "message": "Error al consultar el detalle del usuario"});
     }
   }
 }

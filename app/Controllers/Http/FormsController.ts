@@ -7,21 +7,22 @@ import User from 'App/Models/User';
 export default class FormsController {
   public async index({ response }: HttpContextContract) {
     try {
-      response.status(200).json({"state": true,
-                                "questions": await (await Question.query().where('state', true).preload('answers'))
-                                .map((question: Question) => {
-                                  return {                                    
-                                    question: question.question,
-                                    id: question.id,
-                                    options: question.answers.map((answer: Answer) => {
-                                      return {
-                                        id: answer.id,
-                                        option: answer.answer
-                                      }
-                                    })
-                                  }
-                                })
-                                });
+      response.status(200).json({
+        "state": true,
+        "questions": await (await Question.query().where('state', true).preload('answers'))
+        .map((question: Question) => {
+          return {                                    
+            question: question.question,
+            id: question.id,
+            options: question.answers.map((answer: Answer) => {
+              return {
+                id: answer.id,
+                option: answer.answer
+              }
+            })
+          }
+        })
+      });
     } catch (error) {
       console.log(error);
       response.status(500).json({"state": false, "message": "Error al obtener el listado"});

@@ -5,15 +5,16 @@ import Question from 'App/Models/Question';
 export default class QuestionsController {
   public async index({ response }: HttpContextContract) {
     try {
-      response.status(200).json({"state": true,
-                                "questions": await (await Question.query().where('state', true))
-                                .map((question: Question) => {
-                                  return {                                    
-                                    question: question.question,
-                                    id: question.id
-                                  }
-                                })
-                                });
+      response.status(200).json({
+        "state": true,
+        "questions": await (await Question.query().where('state', true))
+        .map((question: Question) => {
+          return {                                    
+            question: question.question,
+            id: question.id
+          }
+        })
+      });
     } catch (error) {
       console.log(error);
       response.status(500).json({"state": false, "message": "Error al listar las preguntas"});
@@ -70,10 +71,11 @@ export default class QuestionsController {
   public async getOptions({ params, response }: HttpContextContract) {
     try {
       await Question.findOrFail(params.id);
-      response.status(200).json({"state": true,
-                                "message": "Listado de opciones",
-                                "options": await (await Answer.query().where('questionId', params.id).orderBy('id'))
-                              });
+      response.status(200).json({
+        "state": true,
+        "message": "Listado de opciones",
+        "options": await (await Answer.query().where('questionId', params.id).orderBy('id'))
+      });
     } catch (error) {
       console.log(error);
       response.status(500).json({"state": false, "message": "Error al obtener el listado de opciones"});

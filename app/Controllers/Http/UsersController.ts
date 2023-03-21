@@ -5,25 +5,26 @@ import bcryptjs from 'bcryptjs';
 export default class UsersController {
   public async index({ request, response,  }: HttpContextContract) {
     try {      
-      const perPage = request.input('perPage', 1);
-      const page = request.input('page', 10);
-      const filter = request.input('filter');
+      const perPage = request.input('perPage', 10);
+      const page = request.input('page', 1);
+      const filter = request.input('filter', {"name": ""});
       const nameFilter = filter.name;      
       // WIP: expand filter for other fields
       const results = await User.query()
-                                .where('role_id', 2)
-                                .where('state', true)
-                                .where((query) => {
-                                  query.where('first_name', 'ilike', `%${nameFilter}%`)
-                                  .orWhere('second_name', 'ilike', `%${nameFilter}%`)
-                                  .orWhere('surname', 'ilike', `%${nameFilter}%`)
-                                  .orWhere('second_surname', 'ilike', `%${nameFilter}%`)
-                                })
-                                .paginate(page, perPage);
+        .where('role_id', 2)
+        .where('state', true)
+        .where((query) => {
+          query.where('first_name', 'ilike', `%${nameFilter}%`)
+          .orWhere('second_name', 'ilike', `%${nameFilter}%`)
+          .orWhere('surname', 'ilike', `%${nameFilter}%`)
+          .orWhere('second_surname', 'ilike', `%${nameFilter}%`)
+        })
+        .paginate(page, perPage);
 
-      response.status(200).json({"state": true,
-                                "message": "Listado de estudiantes",
-                                "users": results.all()});
+      response.status(200).json({
+        "state": true,
+        "message": "Listado de estudiantes",
+        "users": results.all()});
     } catch (error) {
       console.log(error);
       response.status(500).json({"state": false, "message": "Fallo en el listado de estudiantes"});
@@ -35,7 +36,7 @@ export default class UsersController {
       const {firstName, secondName, surname, secondSurName, typeDocument, documentNumber, email, password, rol, phone} = request.all();
       const emailExists = await User.findBy('email', email);
       if (emailExists) {
-        return response.status(500).json({"state": false, "message": "Fallo en la creación del estudiante"});
+        return response.status(400).json({"state": false, "message": "Fallo en la creación del estudiante"});
       }
       const salt = bcryptjs.genSaltSync();
       const user = new User();
@@ -82,7 +83,11 @@ export default class UsersController {
 
   public async get({ params, response }: HttpContextContract) {
     try {
-      response.status(200).json(await User.find(params.id));
+      const user = await User.find(params.id);
+      if (user === null) {
+        return response.status(404).json({"state": false, "message": "Error al consultar el detalle del usuario"});
+      }
+      response.status(200).json(user);
     } catch (error) {
       console.log(error);
       response.status(500).json({"state": false, "message": "Error al consultar el detalle del usuario"});

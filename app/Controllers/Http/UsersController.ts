@@ -8,9 +8,18 @@ export default class UsersController {
       const perPage = request.input('perPage', 1);
       const page = request.input('page', 10);
       const filter = request.input('filter');
-      console.log(filter);      
-      // WIP: query only students and use filter
-      const results = await User.query().paginate(page, perPage);
+      const nameFilter = filter.name;      
+      // WIP: expand filter for other fields
+      const results = await User.query()
+                                .where('role_id', 2)
+                                .where('state', true)
+                                .where((query) => {
+                                  query.where('first_name', 'ilike', `%${nameFilter}%`)
+                                  .orWhere('second_name', 'ilike', `%${nameFilter}%`)
+                                  .orWhere('surname', 'ilike', `%${nameFilter}%`)
+                                  .orWhere('second_surname', 'ilike', `%${nameFilter}%`)
+                                })
+                                .paginate(page, perPage);
 
       response.status(200).json({"state": true,
                                 "message": "Listado de estudiantes",

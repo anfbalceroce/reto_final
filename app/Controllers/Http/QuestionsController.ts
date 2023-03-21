@@ -25,7 +25,6 @@ export default class QuestionsController {
       const { question, options } = request.all();
       const newQuesiton = new Question();
       newQuesiton.question = question;
-      newQuesiton.state = true;
       await newQuesiton.save();
       options.forEach(async (option: any) => {
         await Answer.create({answer: option.opcion, isCorrect: option.iscorrect, questionId: newQuesiton.id})

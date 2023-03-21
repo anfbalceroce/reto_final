@@ -16,7 +16,7 @@ export default class Users extends BaseSchema {
       table.string('password', 256).notNullable()
       table.integer('role_id').unsigned().references('roles.id').onDelete('CASCADE')
       table.string('phone', 20).notNullable()
-      table.boolean('state')
+      table.boolean('state').defaultTo(true)
       table.timestamps(true)
     })
   }

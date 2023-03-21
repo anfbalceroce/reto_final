@@ -16,7 +16,6 @@ export default class RolesController {
       const {name} = request.all();
       const role = new Role();
       role.name = name;
-      role.state = true;
       await role.save();
       response.status(201).json(role);
     } catch (error) {

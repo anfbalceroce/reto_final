@@ -7,7 +7,7 @@ export default class Questions extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.string('question', 512).notNullable()
-      table.boolean('state')
+      table.boolean('state').defaultTo(true)
       table.timestamps(true)
     })
   }

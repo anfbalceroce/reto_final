@@ -8,6 +8,7 @@ export default class Forms extends BaseSchema {
       table.increments('id')
       table.integer('student_id').unsigned().references('users.id').onDelete('CASCADE')
       table.integer('answer_id').unsigned().references('answers.id').onDelete('CASCADE')
+      table.boolean('state').defaultTo(true)
       table.timestamps(true)
     })
   }

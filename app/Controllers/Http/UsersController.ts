@@ -49,7 +49,6 @@ export default class UsersController {
       user.password = bcryptjs.hashSync(password, salt);
       user.roleId = rol;
       user.phone = phone;
-      user.state = true;
       await user.save();
       response.status(201).json({"state": true, "message": "Estudiante creado correctamente"});
     } catch (error) {

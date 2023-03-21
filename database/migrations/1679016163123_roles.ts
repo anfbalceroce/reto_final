@@ -7,7 +7,7 @@ export default class Roles extends BaseSchema {
     this.schema.createTable(this.tableName, (table) => {
       table.increments('id')
       table.string('name', 50).notNullable()
-      table.boolean('state')
+      table.boolean('state').defaultTo(true)
       table.timestamps(true)
     })
   }

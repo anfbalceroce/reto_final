@@ -16,7 +16,6 @@ export default class DocumentTypesController {
       const {name} = request.all();
       const docType = new DocumentType();
       docType.name = name;
-      docType.state = true;
       await docType.save();
       response.status(201).json(docType);
     } catch (error) {

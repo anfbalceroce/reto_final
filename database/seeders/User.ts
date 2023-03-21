@@ -15,8 +15,7 @@ export default class UserSeeder extends BaseSeeder {
       email: "admin",
       password: bcryptjs.hashSync("pass", salt),
       roleId:1,
-      phone: "1",
-      state: true
+      phone: "1"
     });
   }
 }

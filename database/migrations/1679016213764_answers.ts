@@ -9,7 +9,7 @@ export default class Answers extends BaseSchema {
       table.string('answer', 512).notNullable()
       table.boolean('is_correct').notNullable()
       table.integer('question_id').unsigned().references('questions.id').onDelete('CASCADE')
-      table.boolean('state')
+      table.boolean('state').defaultTo(true)
       table.timestamps(true)
     })
   }

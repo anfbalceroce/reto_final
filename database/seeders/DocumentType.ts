@@ -5,16 +5,13 @@ export default class DocumentTypeSeeder extends BaseSeeder {
   public async run () {
     await DocumentType.createMany([
       {
-        name: "Cédula",
-        state: true
+        name: "Cédula"
       },
       {
-        name: "Tarjeta de identidad",
-        state: true
+        name: "Tarjeta de identidad"
       },
       {
-        name: "Pasaporte",
-        state: true
+        name: "Pasaporte"
       }
     ]);
   }

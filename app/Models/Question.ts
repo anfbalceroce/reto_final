@@ -9,13 +9,13 @@ export default class Question extends BaseModel {
   @column()
   public question: string
 
-  @column()
+  @column({ serializeAs: null })
   public state: boolean
 
-  @column.dateTime({ autoCreate: true })
+  @column.dateTime({ autoCreate: true, serializeAs: null })
   public createdAt: DateTime
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: null })
   public updatedAt: DateTime
 
   @hasMany(() => Answer)

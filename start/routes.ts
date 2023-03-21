@@ -50,9 +50,9 @@ Route.group(() => {
     Route.get('/getQuestions', 'QuestionsController.index');
     Route.post('/create', 'QuestionsController.create');
     Route.put('/updateQuestion/:id', 'QuestionsController.update');
+    Route.delete('/deleteQuestion/:id', 'QuestionsController.delete');
     Route.put('/updateAnswer/:id', 'AnswersController.update');
-    Route.get('/getOptions/:id', 'QuestionsController.getOptions');
-    Route.get('/deleteQuestion/:id', 'QuestionsController.delete');
+    Route.get('/getOptions/:id', 'QuestionsController.getOptions');    
   }).prefix('/questions').middleware(['auth', 'admin']);
 
   Route.group(() => {

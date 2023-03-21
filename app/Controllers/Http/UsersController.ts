@@ -27,7 +27,7 @@ export default class UsersController {
         "users": results.all()});
     } catch (error) {
       console.log(error);
-      response.status(500).json({"state": false, "message": "Fallo en el listado de estudiantes"});
+      response.status(400).json({"state": false, "message": "Fallo en el listado de estudiantes"});
     }
   }
 
@@ -54,7 +54,7 @@ export default class UsersController {
       response.status(201).json({"state": true, "message": "Estudiante creado correctamente"});
     } catch (error) {
       console.log(error);
-      response.status(500).json({"state": false, "message": "Fallo en la creación del estudiante"});
+      response.status(400).json({"state": false, "message": "Fallo en la creación del estudiante"});
     }
   }
 

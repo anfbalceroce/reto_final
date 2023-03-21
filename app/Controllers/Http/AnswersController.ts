@@ -12,7 +12,7 @@ export default class AnswersController {
       response.status(200).json({"state": true, "message": "opcion Editada con exito"});
     } catch (error) {
       console.log(error);
-      response.status(500).json({"state": false, "message": "Error al editar la opcion"});      
+      response.status(404).json({"state": false, "message": "Error al editar la opcion"});      
     }
   }
 }

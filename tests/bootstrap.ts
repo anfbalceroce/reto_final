@@ -22,7 +22,7 @@ import { assert, runFailedTests, specReporter, apiClient } from '@japa/preset-ad
 */
 export const plugins: Required<Config>['plugins'] = [
   assert(),
-  runFailedTests(),
+  //runFailedTests(),
   apiClient()
 ]
 

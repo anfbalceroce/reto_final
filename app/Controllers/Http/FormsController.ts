@@ -42,7 +42,7 @@ export default class FormsController {
       response.status(201).json({"state": true, "message": "Respuestas almacenadas con exito"});
     } catch (error) {
       console.log(error);
-      response.status(500).json({"state": false, "message": "No se pudieron almacenar las respuestas"});
+      response.status(404).json({"state": false, "message": "No se pudieron almacenar las respuestas"});
     }
   }
 }

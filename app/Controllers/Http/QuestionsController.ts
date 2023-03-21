@@ -33,7 +33,7 @@ export default class QuestionsController {
       response.status(201).json({"state": true, "message": "Pregunta creada exitosamente"});    
     } catch (error) {
       console.log(error);
-      response.status(500).json({"state": false, "message": "Error al crear la pregunta"});
+      response.status(400).json({"state": false, "message": "Error al crear la pregunta"});
     }
   }
 
@@ -78,7 +78,7 @@ export default class QuestionsController {
       });
     } catch (error) {
       console.log(error);
-      response.status(500).json({"state": false, "message": "Error al obtener el listado de opciones"});
+      response.status(404).json({"state": false, "message": "Error al obtener el listado de opciones"});
     }
   }
 }

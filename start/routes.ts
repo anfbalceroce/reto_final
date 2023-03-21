@@ -29,22 +29,22 @@ Route.group(() => {
     Route.get('', 'DocumentTypesController.index');
     Route.post('', 'DocumentTypesController.create');
     Route.delete('/:id', 'DocumentTypesController.delete');
-  }).prefix('/document-types');
+  }).prefix('/document-types').middleware(['auth', 'admin']);
 
   Route.group(() => {
     Route.get('', 'RolesController.index');
     Route.post('', 'RolesController.create');
     Route.delete('/:id', 'RolesController.delete');
-  }).prefix('/roles');
+  }).prefix('/roles').middleware(['auth', 'admin']);
 
-  Route.post('/login', 'UsersController.login');
+  Route.post('/login', 'AuthenticationController.login');
 
   Route.group(() => {
     Route.get('/getUsers', 'UsersController.index');
     Route.post('/create', 'UsersController.create');
     Route.put('/update/:id', 'UsersController.update');
     Route.get('/getUser/:id', 'UsersController.get');
-  }).prefix('/user');
+  }).prefix('/user').middleware(['auth', 'admin']);
 
   Route.group(() => {
     Route.get('/getQuestions', 'QuestionsController.index');
@@ -53,11 +53,11 @@ Route.group(() => {
     Route.put('/updateAnswer/:id', 'AnswersController.update');
     Route.get('/getOptions/:id', 'QuestionsController.getOptions');
     Route.get('/deleteQuestion/:id', 'QuestionsController.delete');
-  }).prefix('/questions');
+  }).prefix('/questions').middleware(['auth', 'admin']);
 
   Route.group(() => {
     Route.get('/getquestions', 'FormsController.index');
     Route.post('/postquestions', 'FormsController.create');
-  }).prefix('/form');
+  }).prefix('/form').middleware('auth');
 
 }).prefix('/api/v1')

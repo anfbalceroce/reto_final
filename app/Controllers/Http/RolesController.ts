@@ -4,10 +4,10 @@ import Role from 'App/Models/Role';
 export default class RolesController {
   public async index({ response }: HttpContextContract) {
     try {
-      response.status(200).json(await Role.all());
+      response.status(200).json({"state": true, "roles": await Role.query().where('state', true)});
     } catch (error) {
       console.log(error);
-      response.status(500).json({"message": "Error interno del servidor"});
+      response.status(500).json({"state": false, "message": "Error al listar los roles"});
     }
   }
 
@@ -17,25 +17,22 @@ export default class RolesController {
       const role = new Role();
       role.name = name;
       await role.save();
-      response.status(201).json(role);
+      response.status(201).json({"state": true, "message": "Rol creado exitosamente"});
     } catch (error) {
       console.log(error);
-      response.status(500).json({"message": "Error interno del servidor"});
+      response.status(500).json({"state": false, "message": "Error al crear el rol"});
     }
   }
 
-  public async delete({ params, response}: HttpContextContract) {
+  public async delete({ params, response }: HttpContextContract) {
     try {
-      const role = await Role.find(params.id);
-      if (role === null) {
-        response.status(404).json({"message": "Perfil no encontrado"});
-      } else {
-        await role.delete();
-        response.status(204);
-      }
+      const role = await Role.findOrFail(params.id);
+      role.state = false;
+      await role.save();
+      response.status(200).json({"state": true, "message": "Rol eliminado con exito"});      
     } catch (error) {
       console.log(error);
-      response.status(500).json({"message": "Error interno del servidor"});
+      response.status(404).json({"state": false, "message": "Error al eliminar el rol"});
     }
   }
 }

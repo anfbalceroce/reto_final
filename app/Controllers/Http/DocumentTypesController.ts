@@ -4,10 +4,10 @@ import DocumentType from 'App/Models/DocumentType';
 export default class DocumentTypesController {
   public async index({ response }: HttpContextContract) {
     try {
-      response.status(200).json(await DocumentType.all());
+      response.status(200).json({"state": true, "document types": await DocumentType.query().where('state', true)});
     } catch (error) {
       console.log(error);
-      response.status(500).json({"message": "Error interno del servidor"});
+      response.status(500).json({"state": false, "message": "Error al listar los tipos de documento"});
     }
   }
 
@@ -17,25 +17,22 @@ export default class DocumentTypesController {
       const docType = new DocumentType();
       docType.name = name;
       await docType.save();
-      response.status(201).json(docType);
+      response.status(201).json({"state": true, "message": "Tipo de documento creado exitosamente"});
     } catch (error) {
       console.log(error);
-      response.status(500).json({"message": "Error interno del servidor"});
+      response.status(500).json({"state": false, "message": "Error al crear el tipo de documento"});
     }
   }
 
   public async delete({ params, response}: HttpContextContract) {
     try {
-      const docType = await DocumentType.find(params.id);
-      if (docType === null) {
-        response.status(404).json({"message": "Tipo de documento no encontrado"});
-      } else {
-        await docType.delete();
-        response.status(204);
-      }
+      const docType = await DocumentType.findOrFail(params.id);
+      docType.state = false;
+      await docType.save();
+      response.status(200).json({"state": true, "message": "Tipo de documento eliminado con exito"});;      
     } catch (error) {
       console.log(error);
-      response.status(500).json({"message": "Error interno del servidor"});
+      response.status(404).json({"state": false, "message": "Error al eliminar el tipo de documento"});
     }
   }
 }

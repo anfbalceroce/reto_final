@@ -7,7 +7,7 @@ export default class QuestionsController {
     try {
       response.status(200).json({
         "state": true,
-        "questions": await (await Question.query().where('state', true))
+        "questions": (await Question.query().where('state', true))
         .map((question: Question) => {
           return {                                    
             question: question.question,
@@ -39,32 +39,26 @@ export default class QuestionsController {
 
   public async update({ params, request, response }: HttpContextContract) {
     try {
-      const questionModel = await Question.find(params.id);
-      if (questionModel === null) {
-        return response.status(404).json({"state": false, "message": "Error al editar la pregunta"});
-      }
+      const questionModel = await Question.findOrFail(params.id);
       const { question } = request.all();
       questionModel.question = question;
       await questionModel.save();
       response.status(200).json({"state": true, "message": "Pregunta Editada con exito"});
     } catch (error) {
       console.log(error);
-      response.status(500).json({"state": false, "message": "Error al editar la pregunta"});      
+      response.status(404).json({"state": false, "message": "Error al editar la pregunta"});      
     }
   }
 
   public async delete({ params, response }: HttpContextContract) {
     try {
-      const question = await Question.find(params.id);
-      if (question === null) {
-        return response.status(404).json({"state": false, "message": "Error al eliminar la pregunta"});
-      }
+      const question = await Question.findOrFail(params.id);
       question.state = false;
       await question.save();
       response.status(200).json({"state": true, "message": "Pregunta Eliminada con exito"});
     } catch (error) {
       console.log(error);
-      response.status(500).json({"state": false, "message": "Error al eliminar la pregunta"});      
+      response.status(404).json({"state": false, "message": "Error al eliminar la pregunta"});      
     }
   }
 
@@ -74,7 +68,7 @@ export default class QuestionsController {
       response.status(200).json({
         "state": true,
         "message": "Listado de opciones",
-        "options": await (await Answer.query().where('questionId', params.id).orderBy('id'))
+        "options": (await Answer.query().where('questionId', params.id).orderBy('id'))
       });
     } catch (error) {
       console.log(error);

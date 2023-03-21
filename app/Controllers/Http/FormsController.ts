@@ -9,7 +9,7 @@ export default class FormsController {
     try {
       response.status(200).json({
         "state": true,
-        "questions": await (await Question.query().where('state', true).preload('answers'))
+        "questions": (await Question.query().where('state', true).preload('answers'))
         .map((question: Question) => {
           return {                                    
             question: question.question,

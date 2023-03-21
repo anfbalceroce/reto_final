@@ -6,22 +6,22 @@ export default class Answer extends BaseModel {
   @column({ isPrimary: true })
   public id: number
 
-  @column()
+  @column({ serializeAs: 'option' })
   public answer: string
 
-  @column()
+  @column({ serializeAs: null })
   public isCorrect: boolean
 
-  @column()
+  @column({ serializeAs: null })
   public questionId: number
 
-  @column()
+  @column({ serializeAs: null })
   public state: boolean
 
-  @column.dateTime({ autoCreate: true })
+  @column.dateTime({ autoCreate: true, serializeAs: null })
   public createdAt: DateTime
 
-  @column.dateTime({ autoCreate: true, autoUpdate: true })
+  @column.dateTime({ autoCreate: true, autoUpdate: true, serializeAs: null })
   public updatedAt: DateTime
 
   @hasMany(() => Form)

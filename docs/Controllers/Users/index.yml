@@ -1,0 +1,46 @@
+/api/v1/user/getUsers:
+  get:
+    tags:
+      - Users
+    security:
+      - bearerAuth: []
+    description: Listar estudiantes
+    produces:
+      application/json
+    requestBody:
+      description: Parámetros de búsqueda
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              perPage:
+                type: integer
+                default: 10
+              page:
+                type: integer
+                default: 1
+              filter:
+                type: object
+                properties:
+                  name:
+                    type: string
+                    default: ''
+                default: {
+                  "name": ""
+                }
+    responses:
+      200:
+        description: Petición exitosa
+        schema:
+          type: object
+          properties:
+            state:
+              type: boolean
+            message:
+              type: string
+            users:
+              type: array
+              items:
+                $ref: '#/definitions/User'

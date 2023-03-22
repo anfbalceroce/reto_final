@@ -1,0 +1,36 @@
+/api/v1/form/postquestions:
+  post:
+    tags:
+      - Forms
+    security:
+      - bearerAuth: []
+    description: Regitrar respuestas del estudiante
+    requestBody:
+      description: Datos de las respuestas
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Form'
+          example:
+            {
+                "estudianteId": 2,
+                "answers": [4, 1, 3]
+            }
+    responses:
+      201:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  type: boolean
+                message:
+                  type: string
+            example:
+              {
+                  "state": true,
+                  "message": "Respuestas almacenadas con exito"
+              }

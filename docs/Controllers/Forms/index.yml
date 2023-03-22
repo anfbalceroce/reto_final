@@ -1,0 +1,51 @@
+/api/v1/form/getquestions:
+  get:
+    tags:
+      - Forms
+    security:
+      - bearerAuth: []
+    description: Obtener preguntas con opciones
+    produces:
+      - application/json
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  type: boolean
+                questions:
+                  type: array
+                  items:
+                    $ref: '#/definitions/FormQuestion'
+            example:
+              {
+                  "state": true,
+                  "questions": [
+                      {
+                          "question": "¿que dia es manana?",
+                          "id": 2,
+                          "options": [
+                              {
+                                  "id": 5,
+                                  "option": "esta es correcta"
+                              },
+                              {
+                                  "id": 6,
+                                  "option": "incorrecta"
+                              },
+                              {
+                                  "id": 7,
+                                  "option": "incorrecta"
+                              },
+                              {
+                                  "id": 8,
+                                  "option": "incorrecta"
+                              }
+                          ]
+                      }
+                  ]
+              }

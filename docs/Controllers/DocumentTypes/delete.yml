@@ -1,0 +1,31 @@
+/api/v1/document-types/{id}:
+  delete:
+    tags:
+      - Document Types
+    security:
+      - bearerAuth: []
+    description: Eliminar tipo de documento
+    parameters:
+      - name: id
+        in: path
+        description: ID del tipo de documento
+        required: true
+        schema:
+          type: integer
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  type: boolean
+                dmessage:
+                  type: string
+            example:
+              {
+                  "state": true,
+                  "message": "Tipo de documento eliminado con exito"
+              }

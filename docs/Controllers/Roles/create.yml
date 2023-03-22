@@ -1,0 +1,31 @@
+/api/v1/roles:
+  post:
+    tags:
+      - Roles
+    security:
+      - bearerAuth: []
+    description: Registrar rol
+    requestBody:
+      description: Datos del rol
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Role'
+    responses:
+      201:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  type: boolean
+                dmessage:
+                  type: string
+            example:
+              {
+                  "state": true,
+                  "message": "Rol creado exitosamente"
+              }

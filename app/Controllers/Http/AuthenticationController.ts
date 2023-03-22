@@ -37,7 +37,7 @@ export default class AuthenticationController {
 
   public generateToken(payload: object):string{
       const options = {
-        expiresIn: "60 mins"
+        expiresIn: "120 mins"
       }
       return jwt.sign(payload, Env.get('JWT_SECRET_KEY'), options);
     }

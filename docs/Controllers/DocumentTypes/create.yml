@@ -1,0 +1,31 @@
+/api/v1/document-types:
+  post:
+    tags:
+      - Document Types
+    security:
+      - bearerAuth: []
+    description: Registrar tipo de documento
+    requestBody:
+      description: Datos del tipo de documento
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/DocumentType'
+    responses:
+      201:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  type: boolean
+                dmessage:
+                  type: string
+            example:
+              {
+                  "state": true,
+                  "message": "Tipo de documento creado exitosamente"
+              }

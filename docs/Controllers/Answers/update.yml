@@ -1,0 +1,47 @@
+/api/v1/questions/updateAnswer/{id}:
+  put:
+    tags:
+      - Questions
+    security:
+      - bearerAuth: []
+    description: Editar opcion
+    parameters:
+      - name: id
+        in: path
+        description: ID de la opcion
+        required: true
+        type: integer
+    requestBody:
+      description: Datos de la opcion
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              opcion:
+                type: string
+              iscorrect:
+                type: boolean
+          example:
+            {
+                "opcion": "correcta",
+                "iscorrect": true
+            }
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  type: boolean
+                message:
+                  type: string
+            example:
+              {
+                  "state": true,
+                  "message": "Opcion Editada con exito"
+              }

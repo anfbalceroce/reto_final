@@ -1,0 +1,31 @@
+/api/v1/roles/{id}:
+  delete:
+    tags:
+      - Roles
+    security:
+      - bearerAuth: []
+    description: Eliminar rol
+    parameters:
+      - name: id
+        in: path
+        description: ID del rol
+        required: true
+        schema:
+          type: integer
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  type: boolean
+                message:
+                  type: string
+            example:
+              {
+                  "state": true,
+                  "message": "Rol eliminado con exito"
+              }

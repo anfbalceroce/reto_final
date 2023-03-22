@@ -1,0 +1,44 @@
+/api/v1/user/create:
+  post:
+    tags:
+      - Users
+    security:
+      - bearerAuth: []
+    description: Crear usuario
+    requestBody:
+      description: Datos del usuario
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/User'
+          example:
+            {
+                "firstName": "daniel",
+                "secondName": "jose",
+                "surname": "cruz",
+                "secondSurName": "casallas",
+                "typeDocument": 1,
+                "documentNumber": "123456789",
+                "email": "danielc88@gmail.co",
+                "password": "32jdkdi",
+                "rol":2,
+                "phone": "32123122314"
+            }
+    responses:
+      201:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  type: boolean
+                message:
+                  type: string
+            example:
+              {
+                  "state": true,
+                  "message": "Estudiante creado correctamente"
+              }

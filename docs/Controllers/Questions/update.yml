@@ -1,0 +1,44 @@
+/api/v1/questions/updateQuestion/{id}:
+  put:
+    tags:
+      - Questions
+    security:
+      - bearerAuth: []
+    description: Editar pregunta
+    parameters:
+      - name: id
+        in: path
+        description: ID de la pregunta
+        required: true
+        type: integer
+    requestBody:
+      description: Datos de la pregunta
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              question:
+                type: string
+          example:
+            {
+                "question": "¿que dia es hoy?"
+            }
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  type: boolean
+                message:
+                  type: string
+            example:
+              {
+                  "state": true,
+                  "message": "Pregunta Editada con exito"
+              }

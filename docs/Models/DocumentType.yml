@@ -1,0 +1,24 @@
+definitions:
+  DocumentType:
+    type: object
+    properties:
+      id:
+        type: number
+      name:
+        type: string
+      state:
+        type: boolean
+      created_at:
+        type: string
+      updated_at:
+        type: string
+
+components:
+  schemas:
+    DocumentType:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Cédula
+          required: true

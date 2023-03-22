@@ -52,6 +52,7 @@ export default class QuestionsController {
 
   public async delete({ params, response }: HttpContextContract) {
     try {
+      // wip mark answers as false also
       const question = await Question.findOrFail(params.id);
       question.state = false;
       await question.save();

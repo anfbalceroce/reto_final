@@ -1,0 +1,65 @@
+/api/v1/user/update/{id}:
+  put:
+    tags:
+      - Users
+    security:
+      - bearerAuth: []
+    description: Actualizar usuario
+    parameters:
+      - name: id
+        in: path
+        description: ID del usuario
+        required: true
+        type: integer
+    requestBody:
+      description: Datos del usuario
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              firstName:
+                type: string
+              secondName:
+                type: string
+              surname:
+                type: string
+              secondSurName:
+                type: string
+              typeDocument:
+                type: integer
+              documentNumber:
+                type: string
+              email:
+                type: string
+              phone:
+                type: string
+          example:
+            {
+                "firstName": "daniel",
+                "secondName": "jose",
+                "surname": "cruz",
+                "secondSurName": "casallas",
+                "typeDocument": 1,
+                "documentNumber": "123456789",
+                "email": "danielc88@gmail.co",
+                "phone": "32123122314"
+            }
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  type: boolean
+                message:
+                  type: string
+            example:
+              {
+                  "state": true,
+                  "message": "Se actualizo correctamente"
+              }

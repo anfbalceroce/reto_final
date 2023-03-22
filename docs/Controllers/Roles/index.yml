@@ -1,0 +1,43 @@
+/api/v1/roles:
+  get:
+    tags:
+      - Roles
+    security:
+      - bearerAuth: []
+    description: Listar roles
+    produces:
+     - application/json
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  type: boolean
+                document types:
+                  type: array
+                  items:
+                    $ref: '#/definitions/Role'
+            example:
+              {
+                  "state": true,
+                  "roles": [
+                      {
+                          "id": 1,
+                          "name": "administrador",
+                          "state": true,
+                          "created_at": "2023-03-21T17:24:36.350-05:00",
+                          "updated_at": "2023-03-21T17:24:36.350-05:00"
+                      },
+                      {
+                          "id": 2,
+                          "name": "estudiante",
+                          "state": true,
+                          "created_at": "2023-03-21T17:24:36.354-05:00",
+                          "updated_at": "2023-03-21T17:24:36.354-05:00"
+                      }
+                  ]
+              }

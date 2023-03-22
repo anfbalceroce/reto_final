@@ -1,0 +1,43 @@
+/api/v1/login:
+  post:
+    tags:
+      - Authentication
+    description: Iniciar sesión
+    requestBody:
+      description: Datos de inicio de sesión
+      required: true
+      content:
+        application/json:
+          schema:
+            type: object
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  type: boolean
+                id:
+                  type: integer
+                name:
+                  type: string
+                role:
+                  type: string
+                message:
+                  type: string
+            example:
+              {
+                  "state": true,
+                  "id": 1,
+                  "name": "admin admin admin admin",
+                  "role": "administrador",
+                  "message": "Ingreso exitoso"
+              }

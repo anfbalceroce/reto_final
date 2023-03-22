@@ -1,0 +1,21 @@
+definitions:
+  Question:
+    type: object
+    properties:
+      question:
+        type: string
+      id:
+        type: integer
+
+components:
+  schemas:
+    Question:
+      type: object
+      properties:
+        question:
+          type: string
+          example: "¿que dia es hoy?"
+        options:
+          type: array
+          items:
+            $ref: '#/components/schemas/Answer'

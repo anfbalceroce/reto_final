@@ -1,0 +1,53 @@
+/api/v1/questions/create:
+  post:
+    tags:
+      - Questions
+    security:
+      - bearerAuth: []
+    description: Crear pregunta con opciones
+    requestBody:
+      description: Datos de la pregunta
+      required: true
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Question'
+          example:
+            {
+                "question": "¿que dia es hoy?",
+                "options": [
+                    {
+                        "opcion": "esta es correcta",
+                        "iscorrect": true
+                    },
+                    {
+                        "opcion": "incorrecta",
+                        "iscorrect": false
+                    },
+                    {
+                        "opcion": "incorrecta",
+                        "iscorrect": false
+                    },
+                    {
+                        "opcion": "incorrecta",
+                        "iscorrect": false
+                    }
+                ]
+            }
+    responses:
+      201:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  type: boolean
+                message:
+                  type: string
+            example:
+              {
+                  "state": true,
+                  "message": "Pregunta creada exitosamente"
+              }

@@ -1,0 +1,24 @@
+definitions:
+  Role:
+    type: object
+    properties:
+      id:
+        type: number
+      name:
+        type: string
+      state:
+        type: boolean
+      created_at:
+        type: string
+      updated_at:
+        type: string
+  
+components:
+  schemas:
+    Role:
+      type: object
+      properties:
+        name:
+          type: string
+          example: Administrador
+          required: true

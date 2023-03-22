@@ -1,0 +1,50 @@
+/api/v1/document-types:
+  get:
+    tags:
+      - Document Types
+    security:
+      - bearerAuth: []
+    description: Listar tipos de documento
+    produces:
+     - application/json
+    responses:
+      200:
+        description: Petición exitosa
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                state:
+                  type: boolean
+                document types:
+                  type: array
+                  items:
+                    $ref: '#/definitions/DocumentType'
+            example:
+              {
+                "state": true,
+                "document types": [
+                    {
+                        "id": 1,
+                        "name": "Cédula",
+                        "state": true,
+                        "created_at": "2023-03-21T17:24:36.299-05:00",
+                        "updated_at": "2023-03-21T17:24:36.301-05:00"
+                    },
+                    {
+                        "id": 2,
+                        "name": "Tarjeta de identidad",
+                        "state": true,
+                        "created_at": "2023-03-21T17:24:36.316-05:00",
+                        "updated_at": "2023-03-21T17:24:36.316-05:00"
+                    },
+                    {
+                        "id": 3,
+                        "name": "Pasaporte",
+                        "state": true,
+                        "created_at": "2023-03-21T17:24:36.319-05:00",
+                        "updated_at": "2023-03-21T17:24:36.320-05:00"
+                    }
+                ]
+            }

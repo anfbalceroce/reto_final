@@ -1,0 +1,58 @@
+definitions:
+  User:
+    type: object
+    properties:
+      id:
+        type: number
+      firstName:
+        type: string
+      secondName:
+        type: string
+      surname:
+        type: string
+      secondSurName:
+        type: string
+      typeDocument:
+        type: integer
+      documentNumber:
+        type: integer
+      email:
+        type: string
+      phone:
+        type: string
+
+components:
+  schemas:
+    User:
+      type: object
+      properties:
+        firstName:
+          type: string
+          example: "daniel"
+        secondName:
+          type: string
+          example: "jose"
+        surname:
+          type: string
+          example: "cruz"
+        secondSurName:
+          type: string
+          example: "casallas"
+        typeDocument:
+          type: integer
+          example: 1
+        documentNumber:
+          type: string
+          example: "123456789"
+        email:
+          type: string
+          example: "danielc88@gmail.co"
+        password:
+          type: string
+          example: "32jdkdi"
+        rol:
+          type: integer
+          example: 2
+        phone:
+          type: string
+          example: "32123122314"

@@ -1,0 +1,20 @@
+definitions:
+  Answer:
+    type: object
+    properties:
+      id:
+        type: integer
+      option:
+        type: string
+
+components:
+  schemas:
+    Answer:
+      type: object
+      properties:
+        opcion:
+          type: string
+          example: "esta es correcta"
+        iscorrect:
+          type: boolean
+          example: true

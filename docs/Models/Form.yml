@@ -1,0 +1,24 @@
+definitions:
+  FormQuestion:
+    type: object
+    properties:
+      question:
+        type: string
+      id:
+        type: integer
+      options:
+        type: array
+        items:
+          $ref: '#/definitions/Answer'
+
+components:
+  schemas:
+    Form:
+      type: object
+      properties:
+        estudianteId:
+          type: integer
+        answers:
+          type: array
+          items:
+            type: integer

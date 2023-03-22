@@ -20,7 +20,7 @@ export default class DocumentTypesController {
       response.status(201).json({"state": true, "message": "Tipo de documento creado exitosamente"});
     } catch (error) {
       console.log(error);
-      response.status(500).json({"state": false, "message": "Error al crear el tipo de documento"});
+      response.status(400).json({"state": false, "message": "Error al crear el tipo de documento"});
     }
   }
 

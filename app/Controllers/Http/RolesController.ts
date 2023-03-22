@@ -20,7 +20,7 @@ export default class RolesController {
       response.status(201).json({"state": true, "message": "Rol creado exitosamente"});
     } catch (error) {
       console.log(error);
-      response.status(500).json({"state": false, "message": "Error al crear el rol"});
+      response.status(400).json({"state": false, "message": "Error al crear el rol"});
     }
   }
 

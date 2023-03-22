@@ -24,6 +24,13 @@ test('create doc type', async ({ client }) => {
     return () => Database.rollbackGlobalTransaction();
 })
 
+test('fail create doc type no body', async ({ client }) => {
+    const token = await login();
+    const response = await client.post('api/v1/document-types').header('Authorization', `Bearer ${token}`);
+    response.assertStatus(400);
+    response.assertBody({"state": false, "message": "Error al crear el tipo de documento"});
+})
+
 test('delete doc type', async ({ client }) => {
     const token = await login();
     const response = await client.delete('api/v1/document-types/3').header('Authorization', `Bearer ${token}`);

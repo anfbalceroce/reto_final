@@ -24,6 +24,13 @@ test('create role', async ({ client }) => {
     return () => Database.rollbackGlobalTransaction();
 })
 
+test('fail create role no body', async ({ client }) => {
+    const token = await login();
+    const response = await client.post('api/v1/roles').header('Authorization', `Bearer ${token}`);
+    response.assertStatus(400);
+    response.assertBody({"state": false, "message": "Error al crear el rol"});
+})
+
 test('delete role', async ({ client }) => {
     const token = await login();
     const response = await client.delete('api/v1/roles/2').header('Authorization', `Bearer ${token}`);

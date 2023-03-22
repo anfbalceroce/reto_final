@@ -4,7 +4,7 @@ import { login } from '../TestLogin';
 test('update answer', async ({ client }) => {
   const token = await login();
   const response = await client.put('api/v1/questions/updateAnswer/1').header('Authorization', `Bearer ${token}`).json({
-    "opcion": "correcta",
+    "opcion": "update",
     "iscorrect": true
   });
   response.assertStatus(200);
@@ -14,7 +14,7 @@ test('update answer', async ({ client }) => {
 test('fail update answer does not exist', async ({ client }) => {
   const token = await login();
   const response = await client.put('api/v1/questions/updateAnswer/100').header('Authorization', `Bearer ${token}`).json({
-    "opcion": "correcta",
+    "opcion": "update",
     "iscorrect": true
   });
   response.assertStatus(404);

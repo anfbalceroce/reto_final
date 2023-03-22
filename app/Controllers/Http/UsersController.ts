@@ -77,20 +77,17 @@ export default class UsersController {
       response.status(200).json({"state": true, "message": "Se actualizo correctamente"});
     } catch (error) {
       console.log(error);
-      response.status(500).json({"state": false, "message": "Error al actualizar"});
+      response.status(400).json({"state": false, "message": "Error al actualizar"});
     }
   }
 
   public async get({ params, response }: HttpContextContract) {
     try {
-      const user = await User.find(params.id);
-      if (user === null) {
-        return response.status(404).json({"state": false, "message": "Error al consultar el detalle del usuario"});
-      }
+      const user = await User.findOrFail(params.id);
       response.status(200).json(user);
     } catch (error) {
       console.log(error);
-      response.status(500).json({"state": false, "message": "Error al consultar el detalle del usuario"});
+      response.status(404).json({"state": false, "message": "Error al consultar el detalle del usuario"});
     }
   }
 }

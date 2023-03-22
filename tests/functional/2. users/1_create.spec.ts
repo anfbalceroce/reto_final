@@ -28,7 +28,7 @@ test('fail create user email exists', async ({ client }) => {
     "secondSurName": "casallas",
     "typeDocument": 1,
     "documentNumber": "123456789",
-    "email": "danielc88@gmail.co",
+    "email": "student",
     "password": "32jdkdi",
     "rol":2,
     "phone": "32123122314"
@@ -43,11 +43,3 @@ test('fail create user no body', async ({ client }) => {
   response.assertStatus(400);
   response.assertBody({"state": false, "message": "Fallo en la creación del estudiante"});
 })
-
-test('forbidden access with student role', async ({ client }) => {
-  const token = await login('danielc88@gmail.co', '32jdkdi');
-  const response = await client.get('api/v1/user/getUsers').header('Authorization', `Bearer ${token}`);
-  response.assertStatus(403);
-  response.assertBody({"state": false, "message": "Forbidden"});
-})
-

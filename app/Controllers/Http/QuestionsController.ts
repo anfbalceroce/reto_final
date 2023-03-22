@@ -52,10 +52,14 @@ export default class QuestionsController {
 
   public async delete({ params, response }: HttpContextContract) {
     try {
-      // wip mark answers as false also
       const question = await Question.findOrFail(params.id);
       question.state = false;
       await question.save();
+      const answers = await Answer.query().where('questionId', params.id);
+      answers.forEach(async (answer: Answer) => {
+        answer.state = false;
+        await answer.save();
+      });
       response.status(200).json({"state": true, "message": "Pregunta Eliminada con exito"});
     } catch (error) {
       console.log(error);

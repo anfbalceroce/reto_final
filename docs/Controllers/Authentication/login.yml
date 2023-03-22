@@ -2,7 +2,7 @@
   post:
     tags:
       - Authentication
-    description: Iniciar sesión
+    description: Iniciar sesión, token JWT se retorna en el header
     requestBody:
       description: Datos de inicio de sesión
       required: true
@@ -17,7 +17,7 @@
                 type: string
     responses:
       200:
-        description: Petición exitosa
+        description: Petición exitosa, token se retorna en el header
         content:
           application/json:
             schema:

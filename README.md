@@ -1,5 +1,5 @@
 # Reto final bootcamp desarrollo backend
-Create .env using .env.example and fill PostgreSQL details and generate base64 string for JWT_SECRET_KEY.
+Create .env using .env.example and fill PostgreSQL details.
 ## Install dependencies
 ``` npm i ```
 ## Prep database

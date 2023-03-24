@@ -15,6 +15,11 @@
                 type: string
               password:
                 type: string
+          example:
+            {
+                "email": "admin",
+                "password": "pass"
+            }
     responses:
       200:
         description: Petición exitosa, token se retorna en el header

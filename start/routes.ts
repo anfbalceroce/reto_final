@@ -34,10 +34,10 @@ Route.group(() => {
   }).prefix('/roles').middleware(['auth', 'admin']);
 
   Route.post('/login', 'AuthenticationController.login');
+  Route.post('/user/create', 'UsersController.create');
 
   Route.group(() => {
-    Route.get('/getUsers', 'UsersController.index');
-    Route.post('/create', 'UsersController.create');
+    Route.get('/getUsers', 'UsersController.index');    
     Route.put('/update/:id', 'UsersController.update');
     Route.get('/getUser/:id', 'UsersController.get');
   }).prefix('/user').middleware(['auth', 'admin']);
